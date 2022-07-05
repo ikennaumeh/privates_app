@@ -1,3 +1,25 @@
 {
-  "@@locale": "en"
+  "@@locale": "en",
+  "create_account": "create account",
+  "sign_in": "sign in",
+  "search_by_country_name": "Search by country name",
+  "email_address_can_not_be_empty": "Email address cannot be empty",
+  "email_must_be_a_valid_email_address": "Email must be a valid email address",
+  "first_name_can_not_be_empty": "First name cannot be empty",
+  "last_name_can_not_be_empty": "Last name cannot be empty",
+  "mobile_number_can_not_be_empty": "Mobile number cannot be empty",
+  "password_can_not_be_empty": "Password cannot be empty",
+  "password_must_be_greater_than_six": "Password must be greater than six",
+  "passwords_do_not_match": "Passwords do not match",
+  "password_must_contain_lower_case": "Password must contain lower case",
+  "password_must_contain_upper_case": "Password must contain upper case",
+  "password_must_contain_symbol": "Password must contain symbol",
+  "password_must_contain_number": "Password must contain number",
+  "enter_your_mobile_number": "Enter your mobile number",
+  "verification_code_phrase": "A verification code would be sent to this number. Message and data rate may apply.",
+  "continue_text": "continue",
+  "your_code_is": "Your code is",
+  "enter_otp_phrase": "Please type OTP code that sent to ",
+  "resend_on": "Resend on"
+
 }

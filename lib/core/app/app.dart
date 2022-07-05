@@ -1,3 +1,5 @@
+import 'package:privates_app/ui/views/get_number_view.dart';
+import 'package:privates_app/ui/views/otp_view.dart';
 import 'package:privates_app/ui/views/splashview.dart';
 import 'package:privates_app/ui/views/welcome_view.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -13,7 +15,9 @@ import 'package:stacked_services/stacked_services.dart';
   logger: StackedLogger(),
   routes: [
     AdaptiveRoute(page: SplashView, initial: true),
-    AdaptiveRoute(page: WelcomeView)
+    AdaptiveRoute(page: WelcomeView),
+    AdaptiveRoute(page: GetNumberView),
+    AdaptiveRoute(page: OtpView),
   ]
 
 )
