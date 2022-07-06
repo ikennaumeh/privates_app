@@ -1,6 +1,9 @@
 import 'package:privates_app/ui/views/get_number_view.dart';
+import 'package:privates_app/ui/views/login_view.dart';
 import 'package:privates_app/ui/views/otp_view.dart';
+import 'package:privates_app/ui/views/register_view.dart';
 import 'package:privates_app/ui/views/splashview.dart';
+import 'package:privates_app/ui/views/tabbed_view.dart';
 import 'package:privates_app/ui/views/welcome_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -18,6 +21,9 @@ import 'package:stacked_services/stacked_services.dart';
     AdaptiveRoute(page: WelcomeView),
     AdaptiveRoute(page: GetNumberView),
     AdaptiveRoute(page: OtpView),
+    AdaptiveRoute(page: RegisterView),
+    AdaptiveRoute(page: LoginView),
+    AdaptiveRoute(page: TabbedView),
   ]
 
 )

@@ -3,15 +3,15 @@ import 'package:privates_app/core/app/app.router.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class OtpViewModel extends BaseViewModel{
+class LoginViewModel extends BaseViewModel{
 
   final _navigationService = locator<NavigationService>();
 
-  Future<void> goToRegistration() async {
+  Future<void> login() async {
     setBusy(true);
     notifyListeners();
     await Future.delayed(const Duration(seconds: 2),(){
-      _navigationService.pushNamedAndRemoveUntil(Routes.registerView,);
+      _navigationService.pushNamedAndRemoveUntil(Routes.tabbedView,);
     });
     setBusy(false);
     notifyListeners();

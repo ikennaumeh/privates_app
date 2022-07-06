@@ -9,4 +9,11 @@ class Palette {
   static const transparent = Colors.transparent;
   static const grey = Colors.grey;
   static const darkBlue = Color(0xff222B45);
+  static const lightShadowGrey = Color.fromRGBO(0, 0, 0, 0.05);
+  static const red = Colors.red;
+  static  const buttonShadow = BoxShadow(
+    color: lightShadowGrey,
+    offset: Offset(0, 2.0),
+    blurRadius: 2.0,
+  );
 }

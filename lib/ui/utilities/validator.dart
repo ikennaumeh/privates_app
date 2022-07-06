@@ -21,6 +21,13 @@ class Validator {
       return null;
     }
   }
+  static String? validateFullName(String? s) {
+    if (TextUtil.isEmpty(s)) {
+      return S.current.full_name_can_not_be_empty;
+    } else {
+      return null;
+    }
+  }
 
   static String? validateLastName(String? s) {
     if (TextUtil.isEmpty(s)) {

@@ -28,7 +28,7 @@ class WelcomeView extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: DeviceScaler().scale(170),
+              height: DeviceScaler().scale(150),
             ),
             PrimaryButton(
               color: Palette.white,
@@ -43,9 +43,11 @@ class WelcomeView extends StatelessWidget {
             ),
             PrimaryBorderButton(
               margin: EdgeInsets.only(
-                  left: 20, right: 20, bottom: DeviceScaler().scale(50)),
+                  left: 20, right: 20, bottom: DeviceScaler().scale(80)),
               buttonConfig:
-                  ButtonConfig(text: S.current.sign_in, action: () {}),
+                  ButtonConfig(text: S.current.sign_in, action: () {
+                    locator<NavigationService>().navigateTo(Routes.loginView);
+                  }),
             ),
           ],
         ),

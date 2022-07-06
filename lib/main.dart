@@ -27,7 +27,8 @@ class MyApp extends StatelessWidget {
           elevation: 0
         ),
         fontFamily: GoogleFonts.nunito().fontFamily,
-        useMaterial3: true
+        useMaterial3: true,
+        textSelectionTheme: const TextSelectionThemeData(cursorColor: Palette.primary)
 
       ),
       localizationsDelegates: const [
