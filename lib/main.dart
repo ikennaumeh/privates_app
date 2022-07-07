@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:privates_app/core/app/app.locator.dart';
 import 'package:privates_app/core/app/app.router.dart';
+import 'package:privates_app/core/decorations/color_palette.dart';
+import 'package:privates_app/generated/l10n.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 void main() {
@@ -19,9 +22,23 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Privates',
       theme: ThemeData(
+        scaffoldBackgroundColor: Palette.white,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Palette.white,
+          elevation: 0
+        ),
         fontFamily: GoogleFonts.nunito().fontFamily,
+        useMaterial3: true,
+        textSelectionTheme: const TextSelectionThemeData(cursorColor: Palette.primary)
 
       ),
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
       initialRoute: Routes.splashView,
       onGenerateRoute: StackedRouter().onGenerateRoute,
       navigatorKey: StackedService.navigatorKey,
