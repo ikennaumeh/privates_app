@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:privates_app/core/decorations/color_palette.dart';
 import 'package:privates_app/core/decorations/device_scaler.dart';
 import 'package:privates_app/generated/l10n.dart';
@@ -16,21 +13,18 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Palette.lightShadowGrey,
-      appBar: PreferredSize(
-        preferredSize: const Size(0, 60),
-        child: AppBar(
-          title: Text(
-            S.current.privates,
-            style: TextStyle(
-              color: Palette.primary,
-              fontWeight: FontWeight.w900,
-              fontSize: DeviceScaler().scaleFont(20),
-            ),
+      appBar: AppBar(
+        title: Text(
+          S.current.privates,
+          style: TextStyle(
+            color: Palette.primary,
+            fontWeight: FontWeight.w900,
+            fontSize: DeviceScaler().scaleFont(20),
           ),
-          actions: [
-            Image.asset("assets/png/photo.png"),
-          ],
         ),
+        actions: [
+          Image.asset("assets/png/photo.png"),
+        ],
       ),
       body: ViewModelBuilder.reactive(viewModelBuilder: () => HomeViewModel(), builder: (_,model,__){
         Widget body = SingleChildScrollView(

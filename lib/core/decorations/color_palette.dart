@@ -8,6 +8,7 @@ class Palette {
   static const grey10 = Color(0xff979797);
   static const transparent = Colors.transparent;
   static const grey = Colors.grey;
+  static const searchFillColor = Color(0xffE6EAEE);
   static const lightBlue = Color(0xff262171);
   static const darkBlue = Color(0xff222B45);
   static const lightShadowGrey = Color.fromRGBO(0, 0, 0, 0.05);
