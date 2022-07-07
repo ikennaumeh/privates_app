@@ -23,6 +23,9 @@
   "enter_otp_phrase": "Please type OTP code that sent to ",
   "resend_on": "Resend on",
   "register": "Register",
-  "login": "Login"
+  "login": "Login",
+  "privates": "Privates",
+  "suggestions": "Suggestions",
+  "people_who_might_interest_you": "People who might interest you"
 
 }

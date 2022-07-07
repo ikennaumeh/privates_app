@@ -199,7 +199,7 @@ class _RegisterViewState extends State<RegisterView> {
                     buttonConfig: ButtonConfig(
                       action: () {
                         if (_formKey.currentState!.validate()) {
-                          _model.register();
+                          model.register();
                         }
                       },
                       text: S.current.register,
