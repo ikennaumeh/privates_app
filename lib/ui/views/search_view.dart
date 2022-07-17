@@ -27,7 +27,7 @@ class SearchView extends StatelessWidget {
           viewModelBuilder: () => SearchViewModel(),
           builder: (_,model,__){
             Widget body = Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: SingleChildScrollView(
                 child: Column(
                   children: [

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,7 +30,13 @@ class MyApp extends StatelessWidget {
         ),
         fontFamily: GoogleFonts.nunito().fontFamily,
         useMaterial3: true,
-        textSelectionTheme: const TextSelectionThemeData(cursorColor: Palette.primary)
+        textSelectionTheme: const TextSelectionThemeData(cursorColor: Palette.primary),
+        pageTransitionsTheme: const PageTransitionsTheme(
+          builders: {
+            TargetPlatform.android : CupertinoPageTransitionsBuilder(),
+            TargetPlatform.iOS : ZoomPageTransitionsBuilder(),
+          }
+        )
 
       ),
       localizationsDelegates: const [
