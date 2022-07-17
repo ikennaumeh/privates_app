@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:privates_app/core/decorations/color_palette.dart';
@@ -43,87 +44,92 @@ class _LoginViewState extends State<LoginView> {
         builder: (_, model, __){
 
           Widget body = SafeArea(
-              child: SizedBox(
-                width: double.maxFinite,
-                height: double.maxFinite,
-                child: Column(
-                  children: [
-                    const OneActionAppBar(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Form(
-                        key: _formKey,
-                        child: SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                height: DeviceScaler().scale(20),
-                              ),
-                              Align(
-                                alignment: Alignment.center,
-                                child: SvgPicture.asset("assets/svg/private-logo.svg"),
-                              ),
-                              SizedBox(
-                                height: DeviceScaler().scale(50),
-                              ),
-                              Text(
-                                S.current.login,
-                                style: TextStyle(
-                                  fontSize: DeviceScaler().scaleFont(25),
-                                  fontWeight: FontWeight.w600,
+              child: GestureDetector(
+                onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+                child: Container(
+                  width: double.maxFinite,
+                  height: double.maxFinite,
+                  color: Colors.transparent,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      const OneActionAppBar(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Form(
+                          key: _formKey,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: DeviceScaler().scale(20),
                                 ),
-                              ),
-                              SizedBox(
-                                height: DeviceScaler().scale(30),
-                              ),
-                              TextFormField(
-                                controller: _email,
-                                keyboardType: TextInputType.emailAddress,
-                                decoration: const InputDecoration(
-                                  labelText: "Email",
-                                  labelStyle: TextStyle(
-                                    color: Palette.darkBlue,
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: SvgPicture.asset("assets/svg/private-logo.svg"),
+                                ),
+                                SizedBox(
+                                  height: DeviceScaler().scale(50),
+                                ),
+                                Text(
+                                  S.current.login,
+                                  style: TextStyle(
+                                    fontSize: DeviceScaler().scaleFont(25),
+                                    fontWeight: FontWeight.w600,
                                   ),
-                                  border: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Palette.grey)),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Palette.primary)),
-                                  errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Palette.red)),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Palette.red)),
                                 ),
-                                validator: (value) => Validator.validateEmail(value),
-                              ),
-                              SizedBox(
-                                height: DeviceScaler().scale(20),
-                              ),
-                              TextFormField(
-                                controller: _password,
-                                obscureText: true,
-                                decoration: const InputDecoration(
-                                  labelText: "Password",
-                                  labelStyle: TextStyle(
-                                    color: Palette.darkBlue,
+                                SizedBox(
+                                  height: DeviceScaler().scale(30),
+                                ),
+                                TextFormField(
+                                  controller: _email,
+                                  keyboardType: TextInputType.emailAddress,
+                                  decoration: const InputDecoration(
+                                    labelText: "Email",
+                                    labelStyle: TextStyle(
+                                      color: Palette.darkBlue,
+                                    ),
+                                    border: OutlineInputBorder(
+                                        borderSide: BorderSide(color: Palette.grey)),
+                                    focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(color: Palette.primary)),
+                                    errorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(color: Palette.red)),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(color: Palette.red)),
                                   ),
-                                  border: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Palette.grey)),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Palette.primary)),
-                                  errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Palette.red)),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Palette.red)),
+                                  validator: (value) => Validator.validateEmail(value),
                                 ),
-                                validator: (value) => Validator.validatePassword(value),
-                              ),
-                            ],
+                                SizedBox(
+                                  height: DeviceScaler().scale(20),
+                                ),
+                                TextFormField(
+                                  controller: _password,
+                                  obscureText: true,
+                                  decoration: const InputDecoration(
+                                    labelText: "Password",
+                                    labelStyle: TextStyle(
+                                      color: Palette.darkBlue,
+                                    ),
+                                    border: OutlineInputBorder(
+                                        borderSide: BorderSide(color: Palette.grey)),
+                                    focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(color: Palette.primary)),
+                                    errorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(color: Palette.red)),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(color: Palette.red)),
+                                  ),
+                                  validator: (value) => Validator.validatePassword(value),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ));
 

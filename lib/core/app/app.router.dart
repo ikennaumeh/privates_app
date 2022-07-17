@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
+import '../../ui/views/chats_screen_view.dart';
 import '../../ui/views/get_number_view.dart';
 import '../../ui/views/login_view.dart';
 import '../../ui/views/otp_view.dart';
@@ -17,6 +18,7 @@ import '../../ui/views/register_view.dart';
 import '../../ui/views/splashview.dart';
 import '../../ui/views/tabbed_view.dart';
 import '../../ui/views/welcome_view.dart';
+import '../models/chat.dart';
 
 class Routes {
   static const String splashView = '/';
@@ -26,6 +28,7 @@ class Routes {
   static const String registerView = '/register-view';
   static const String loginView = '/login-view';
   static const String tabbedView = '/tabbed-view';
+  static const String chatScreenView = '/chat-screen-view';
   static const all = <String>{
     splashView,
     welcomeView,
@@ -34,6 +37,7 @@ class Routes {
     registerView,
     loginView,
     tabbedView,
+    chatScreenView,
   };
 }
 
@@ -48,6 +52,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.registerView, page: RegisterView),
     RouteDef(Routes.loginView, page: LoginView),
     RouteDef(Routes.tabbedView, page: TabbedView),
+    RouteDef(Routes.chatScreenView, page: ChatScreenView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -98,6 +103,16 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    ChatScreenView: (data) {
+      var args = data.getArgs<ChatScreenViewArguments>(nullOk: false);
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => ChatScreenView(
+          key: args.key,
+          chat: args.chat,
+        ),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -110,4 +125,11 @@ class OtpViewArguments {
   final Key? key;
   final String phoneNumber;
   OtpViewArguments({this.key, required this.phoneNumber});
+}
+
+/// ChatScreenView arguments holder class
+class ChatScreenViewArguments {
+  final Key? key;
+  final Chat chat;
+  ChatScreenViewArguments({this.key, required this.chat});
 }

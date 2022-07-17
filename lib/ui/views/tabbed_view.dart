@@ -55,7 +55,7 @@ class TabbedView extends StatelessWidget {
             BottomNavigationBarItem(
               activeIcon: SvgPicture.asset('assets/svg/chat.svg', color: Palette.primary,),
               icon: SvgPicture.asset('assets/svg/chat.svg',),
-              label: 'Post',
+              label: 'Chat',
             ),
           ],
           onTap: model.setIndex,
