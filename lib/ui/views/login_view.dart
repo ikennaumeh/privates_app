@@ -160,7 +160,7 @@ class _LoginViewState extends State<LoginView> {
                     buttonConfig: ButtonConfig(
                       action: () {
                         if (_formKey.currentState!.validate()) {
-                          model.login();
+                          model.login(email: _email.text, password: _password.text);
                         }
                       },
                       text: S.current.login,

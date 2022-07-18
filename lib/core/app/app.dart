@@ -1,3 +1,5 @@
+import 'package:privates_app/core/services/firebase_auth.dart';
+import 'package:privates_app/ui/utilities/phone_util.dart';
 import 'package:privates_app/ui/views/chats_screen_view.dart';
 import 'package:privates_app/ui/views/get_number_view.dart';
 import 'package:privates_app/ui/views/login_view.dart';
@@ -15,6 +17,9 @@ import 'package:stacked_services/stacked_services.dart';
 @StackedApp(
   dependencies: [
     LazySingleton(classType: NavigationService),
+    LazySingleton(classType: PhoneUtil),
+    LazySingleton(classType: DialogService),
+    LazySingleton(classType: FirebaseService),
   ],
   logger: StackedLogger(),
   routes: [

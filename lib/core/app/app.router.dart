@@ -81,6 +81,7 @@ class StackedRouter extends RouterBase {
         builder: (context) => OtpView(
           key: args.key,
           phoneNumber: args.phoneNumber,
+          id: args.id,
         ),
         settings: data,
       );
@@ -124,7 +125,8 @@ class StackedRouter extends RouterBase {
 class OtpViewArguments {
   final Key? key;
   final String phoneNumber;
-  OtpViewArguments({this.key, required this.phoneNumber});
+  final String id;
+  OtpViewArguments({this.key, required this.phoneNumber, required this.id});
 }
 
 /// ChatScreenView arguments holder class

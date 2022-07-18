@@ -27,7 +27,7 @@ class HomeView extends StatelessWidget {
           Image.asset("assets/png/photo.png"),
         ],
       ),
-      body: ViewModelBuilder.reactive(viewModelBuilder: () => HomeViewModel(), builder: (_,model,__){
+      body: ViewModelBuilder<HomeViewModel>.reactive(viewModelBuilder: () => HomeViewModel(), builder: (_,model,__){
         Widget body = SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -50,3 +50,6 @@ lib/generated/intl
 lib/generated/intl/messages_all.dart
 lib/generated/intl/messages_en.dart
 lib/generated/l10n.dart
+
+android/app/google-services.json
+

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:privates_app/core/decorations/color_palette.dart';
@@ -18,7 +19,6 @@ class _ChatScreenViewState extends State<ChatScreenView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Palette.red,
       appBar: AppBar(
         leading: const CustomBackButton(),
         title: Column(
@@ -68,28 +68,39 @@ class _ChatScreenViewState extends State<ChatScreenView> {
       ),
       body: Column(
         children: [
-          Expanded(child: Container(color: Colors.red,)),
+          Expanded(child: GestureDetector(
+              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+              child: Container(color: Colors.red,))),
           Container(
-            height: 55,
-            margin: const EdgeInsets.only(bottom: 5),
+            color: Colors.blue,
+            padding: const EdgeInsets.symmetric(vertical: 5),
             child: Row(
               children: [
-                const SizedBox(width: 5,),
                 Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Palette.textFieldFillColor,
-                      hintText: "Message",
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(30),
-                      )
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5,),
+                    child: TextField(
+                      minLines: 1,
+                      maxLines: 3,
+                      textInputAction: TextInputAction.send,
+                      style: const TextStyle(
+                        height: 1,
+                      ),
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Palette.textFieldFillColor,
+                        hintText: "Message",
+                        contentPadding: const EdgeInsets.only(left: 20, right: 20, top: 10,bottom: 10),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(20),
+                        )
+                      ),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  padding: const EdgeInsets.only(right: 5),
                   child: SvgPicture.asset("assets/svg/send-media.svg", width: 35,),
                 ),
               ],

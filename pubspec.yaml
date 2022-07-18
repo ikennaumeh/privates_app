@@ -47,6 +47,9 @@ dependencies:
   flutter_spinkit: ^5.0.0
   google_fonts: ^3.0.1
   timeago: ^3.2.2
+  libphonenumber: ^2.0.2
+  firebase_auth: ^3.4.2
+  firebase_core: ^1.19.2
 
 dev_dependencies:
   flutter_test:

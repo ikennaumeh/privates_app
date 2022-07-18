@@ -38,7 +38,7 @@ class WelcomeView extends StatelessWidget {
               buttonConfig: ButtonConfig(
                   text: S.current.create_account,
                   action: (){
-                    locator<NavigationService>().navigateTo(Routes.getNumberView);
+                    locator<NavigationService>().navigateTo(Routes.registerView);
                   }),
             ),
             PrimaryBorderButton(
