@@ -106,15 +106,23 @@ class _LoginViewState extends State<LoginView> {
                                 ),
                                 TextFormField(
                                   controller: _password,
-                                  obscureText: true,
-                                  decoration: const InputDecoration(
+                                  obscureText: model.hide,
+
+                                  decoration:  InputDecoration(
+                                    suffixIcon: InkWell(
+                                      onTap: () => model.toggleVisibility(),
+                                      child: Icon(
+                                        model.hide ? Icons.visibility : Icons.visibility_off,
+                                        color: Palette.grey,
+                                      ),
+                                    ),
                                     labelText: "Password",
-                                    labelStyle: TextStyle(
+                                    labelStyle: const TextStyle(
                                       color: Palette.darkBlue,
                                     ),
-                                    border: OutlineInputBorder(
+                                    border: const OutlineInputBorder(
                                         borderSide: BorderSide(color: Palette.grey)),
-                                    focusedBorder: OutlineInputBorder(
+                                    focusedBorder: const OutlineInputBorder(
                                         borderSide: BorderSide(color: Palette.primary)),
                                     errorBorder: OutlineInputBorder(
                                         borderSide: BorderSide(color: Palette.red)),
@@ -122,6 +130,7 @@ class _LoginViewState extends State<LoginView> {
                                         borderSide: BorderSide(color: Palette.red)),
                                   ),
                                   validator: (value) => Validator.validatePassword(value),
+
                                 ),
                               ],
                             ),

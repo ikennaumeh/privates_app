@@ -28,6 +28,8 @@
   "suggestions": "Suggestions",
   "people_who_might_interest_you": "People who might interest you",
   "search": "Search",
-  "chats": "Chats"
+  "chats": "Chats",
+  "error": "Error",
+  "post": "Post"
 
 }

@@ -3,6 +3,7 @@ import 'package:logger/logger.dart';
 import 'package:privates_app/core/app/app.locator.dart';
 import 'package:privates_app/core/app/app.router.dart';
 import 'package:privates_app/core/services/firebase_auth.dart';
+import 'package:privates_app/generated/l10n.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -12,6 +13,13 @@ class LoginViewModel extends BaseViewModel{
   final _showDialog = locator<DialogService>();
   late User? _user;
   final _navigationService = locator<NavigationService>();
+
+  bool hide = true;
+
+  void toggleVisibility(){
+    hide = !hide;
+    notifyListeners();
+  }
 
   Future<void> login({required String email, required String password}) async {
     setBusy(true);
@@ -23,7 +31,7 @@ class LoginViewModel extends BaseViewModel{
       }
     } on FirebaseAuthException catch (e){
       log.e(e);
-      _showDialog.showDialog(title: "Error", description: e.message);
+      _showDialog.showDialog(title: S.current.error, description: e.message);
     } finally{
       setBusy(false);
       notifyListeners();

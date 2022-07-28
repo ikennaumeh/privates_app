@@ -14,4 +14,5 @@ class HomeViewModel extends BaseViewModel{
     user = _auth.getUser();
     _showDialog.showDialog(description: "Name: ${user?.displayName}, Email: ${user?.email}");
   }
+
 }
