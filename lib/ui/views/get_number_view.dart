@@ -24,7 +24,7 @@ class _GetNumberViewState extends State<GetNumberView> {
   late GetNumberViewModel _model;
   late TextEditingController _phoneController;
   late FocusNode _phoneFocusNode;
-  PhoneNumber? enteredPhone;
+  late PhoneNumber enteredPhone;
 
   @override
   void initState() {
@@ -107,7 +107,7 @@ class _GetNumberViewState extends State<GetNumberView> {
                         buttonConfig: ButtonConfig(
                           text: S.current.continue_text,
                           action: () async {
-                            await model.goToOtpView("${enteredPhone?.completeNumber}");
+                            await model.goToOtpView(enteredPhone);
                           },
                         ),
                       ),

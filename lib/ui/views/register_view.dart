@@ -7,7 +7,6 @@ import 'package:privates_app/ui/utilities/validator.dart';
 import 'package:privates_app/ui/view-models/register_view_model.dart';
 import 'package:privates_app/ui/widgets/button.dart';
 import 'package:privates_app/ui/widgets/full_screen_loading_indicator.dart';
-import 'package:privates_app/ui/widgets/one_action_topbar.dart';
 import 'package:stacked/stacked.dart';
 
 class RegisterView extends StatefulWidget {
@@ -199,7 +198,7 @@ class _RegisterViewState extends State<RegisterView> {
                     buttonConfig: ButtonConfig(
                       action: () {
                         if (_formKey.currentState!.validate()) {
-                          model.register();
+                          model.register(email: _email.text, password: _password.text, fullName: _fullName.text);
                         }
                       },
                       text: S.current.register,

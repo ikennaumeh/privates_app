@@ -48,11 +48,6 @@ class TabbedView extends StatelessWidget {
               label: 'Search',
             ),
             BottomNavigationBarItem(
-              activeIcon: SvgPicture.asset('assets/svg/post.svg', color: Palette.primary,),
-              icon: SvgPicture.asset('assets/svg/post.svg',),
-              label: 'Post',
-            ),
-            BottomNavigationBarItem(
               activeIcon: SvgPicture.asset('assets/svg/chat.svg', color: Palette.primary,),
               icon: SvgPicture.asset('assets/svg/chat.svg',),
               label: 'Chat',
@@ -70,9 +65,7 @@ class TabbedView extends StatelessWidget {
         return const HomeView();
       case 1 :
         return const SearchView();
-      case 2 :
-        return const PostView();
-      case 3:
+      case 2:
         return const ChatView();
       default:
         return const HomeView();

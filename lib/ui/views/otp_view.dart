@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:privates_app/core/decorations/color_palette.dart';
 import 'package:privates_app/core/decorations/device_scaler.dart';
@@ -11,8 +12,8 @@ import 'package:stacked/stacked.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpView extends StatefulWidget {
-  final String phoneNumber;
-  const OtpView({Key? key,required this.phoneNumber}) : super(key: key);
+  final String phoneNumber, id;
+  const OtpView({Key? key,required this.phoneNumber,required this.id}) : super(key: key);
 
   @override
   _OtpViewState createState() => _OtpViewState();
@@ -77,7 +78,7 @@ class _OtpViewState extends State<OtpView> {
                         fontWeight: FontWeight.bold,
                       ),
                       autovalidateMode: AutovalidateMode.disabled,
-                      length: 4,
+                      length: 6,
                       obscureText: true,
                       obscuringCharacter: '*',
                       blinkWhenObscuring: true,
@@ -92,8 +93,8 @@ class _OtpViewState extends State<OtpView> {
                           shape: PinCodeFieldShape.box,
                           borderWidth: 1,
                           borderRadius: BorderRadius.circular(5),
-                          fieldHeight: 65,
-                          fieldWidth: 65,
+                          fieldHeight: 45,
+                          fieldWidth: 45,
                           inactiveColor: Palette.grey,
                           activeFillColor: Palette.transparent,
                           inactiveFillColor: Palette.transparent,
@@ -147,7 +148,10 @@ class _OtpViewState extends State<OtpView> {
                     PrimaryButton(
                       buttonConfig: ButtonConfig(
                         text: S.current.continue_text,
-                        action: model.goToRegistration,
+                        action: () async {
+                          PhoneAuthCredential phoneAuth = PhoneAuthProvider.credential(verificationId: widget.id, smsCode: _controller.text);
+                          model.goToRegistration(phoneAuth);
+                        },
                       ),
                     ),
 

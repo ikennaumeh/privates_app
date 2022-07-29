@@ -14,6 +14,7 @@ import '../../ui/views/chats_screen_view.dart';
 import '../../ui/views/get_number_view.dart';
 import '../../ui/views/login_view.dart';
 import '../../ui/views/otp_view.dart';
+import '../../ui/views/post_view.dart';
 import '../../ui/views/register_view.dart';
 import '../../ui/views/splashview.dart';
 import '../../ui/views/tabbed_view.dart';
@@ -29,6 +30,7 @@ class Routes {
   static const String loginView = '/login-view';
   static const String tabbedView = '/tabbed-view';
   static const String chatScreenView = '/chat-screen-view';
+  static const String postView = '/post-view';
   static const all = <String>{
     splashView,
     welcomeView,
@@ -38,6 +40,7 @@ class Routes {
     loginView,
     tabbedView,
     chatScreenView,
+    postView,
   };
 }
 
@@ -53,6 +56,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.loginView, page: LoginView),
     RouteDef(Routes.tabbedView, page: TabbedView),
     RouteDef(Routes.chatScreenView, page: ChatScreenView),
+    RouteDef(Routes.postView, page: PostView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -81,6 +85,7 @@ class StackedRouter extends RouterBase {
         builder: (context) => OtpView(
           key: args.key,
           phoneNumber: args.phoneNumber,
+          id: args.id,
         ),
         settings: data,
       );
@@ -113,6 +118,12 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    PostView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const PostView(),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -124,7 +135,8 @@ class StackedRouter extends RouterBase {
 class OtpViewArguments {
   final Key? key;
   final String phoneNumber;
-  OtpViewArguments({this.key, required this.phoneNumber});
+  final String id;
+  OtpViewArguments({this.key, required this.phoneNumber, required this.id});
 }
 
 /// ChatScreenView arguments holder class

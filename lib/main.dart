@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -8,8 +9,9 @@ import 'package:privates_app/core/decorations/color_palette.dart';
 import 'package:privates_app/generated/l10n.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   setupLocator();
   runApp(const MyApp());
 }
