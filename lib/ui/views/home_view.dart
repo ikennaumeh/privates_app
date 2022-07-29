@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:privates_app/core/decorations/color_palette.dart';
 import 'package:privates_app/core/decorations/device_scaler.dart';
 import 'package:privates_app/generated/l10n.dart';
@@ -17,6 +18,11 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+
+  late HomeViewModel _model;
+
+
+
   ///Read from Fire base
   Stream<List<Upload>> readUser() => FirebaseFirestore.instance
       .collection("users")
@@ -28,6 +34,12 @@ class _HomeViewState extends State<HomeView> {
     //First reference the document and delete
     final docUser = FirebaseFirestore.instance.collection("// the collection").doc("//the id");
     await docUser.delete();
+  }
+
+  @override
+  void initState() {
+    _model = HomeViewModel();
+    super.initState();
   }
 
   @override
@@ -141,6 +153,10 @@ class _HomeViewState extends State<HomeView> {
 
         return Stack(children: stackChildren,);
       }),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Palette.primary,
+        onPressed: _model.goToPostView,
+        child: SvgPicture.asset("assets/svg/post.svg", color: Palette.white,),),
     );
   }
 

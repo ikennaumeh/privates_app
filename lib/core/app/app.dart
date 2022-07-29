@@ -4,6 +4,7 @@ import 'package:privates_app/ui/views/chats_screen_view.dart';
 import 'package:privates_app/ui/views/get_number_view.dart';
 import 'package:privates_app/ui/views/login_view.dart';
 import 'package:privates_app/ui/views/otp_view.dart';
+import 'package:privates_app/ui/views/post_view.dart';
 import 'package:privates_app/ui/views/register_view.dart';
 import 'package:privates_app/ui/views/splashview.dart';
 import 'package:privates_app/ui/views/tabbed_view.dart';
@@ -30,7 +31,8 @@ import 'package:stacked_services/stacked_services.dart';
     AdaptiveRoute(page: RegisterView),
     AdaptiveRoute(page: LoginView),
     AdaptiveRoute(page: TabbedView),
-    AdaptiveRoute(page: ChatScreenView)
+    AdaptiveRoute(page: ChatScreenView),
+    AdaptiveRoute(page: PostView),
   ]
 
 )
