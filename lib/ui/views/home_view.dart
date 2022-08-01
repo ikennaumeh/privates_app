@@ -79,9 +79,23 @@ class _HomeViewState extends State<HomeView> {
                     return ListView(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      children: users.map((user) => ListTile(
-                        title: Text(user.name),
-                        subtitle: Text(user.profession),
+                      children: users.map((user) => Column(
+                        children: [
+                          Container(
+                            width: double.maxFinite,
+                            height: DeviceScaler().scale(200),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: NetworkImage("${user.postLink}"),
+                                fit: BoxFit.fill,
+                              )
+                            ),
+                          ),
+                          ListTile(
+                            title: Text(user.name),
+                            subtitle: Text(user.profession),
+                          ),
+                        ],
                       )).toList(),
                     );
                   }
@@ -155,7 +169,7 @@ class _HomeViewState extends State<HomeView> {
       }),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Palette.primary,
-        onPressed: _model.goToPostView,
+        onPressed: _model.selectFile,
         child: SvgPicture.asset("assets/svg/post.svg", color: Palette.white,),),
     );
   }
