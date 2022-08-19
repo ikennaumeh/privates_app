@@ -1,13 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:privates_app/core/decorations/color_palette.dart';
 import 'package:privates_app/core/decorations/device_scaler.dart';
 import 'package:privates_app/core/models/chat.dart';
+import 'package:privates_app/core/models/message.dart';
+import 'package:privates_app/ui/view-models/chats_view_model.dart';
 import 'package:privates_app/ui/widgets/custom_back_button.dart';
+import 'package:privates_app/ui/widgets/others_message.dart';
+import 'package:privates_app/ui/widgets/user_message.dart';
+import 'package:stacked/stacked.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class ChatScreenView extends StatefulWidget {
@@ -28,18 +32,6 @@ class _ChatScreenViewState extends State<ChatScreenView> {
     _message = TextEditingController();
   }
 
-  Future<void> _send(String text) async {
-    if (kDebugMode) {
-      final user = FirebaseAuth.instance.currentUser;
-      if(user != null){
-        Message message = Message(author: user.displayName ?? "Anonymous", authorId: user.uid,
-            photoUrl: user.photoURL ?? "https://placehold.it/100x100", timestamp: Timestamp.now().millisecondsSinceEpoch, value: text);
-        await FirebaseFirestore.instance.collection("chat_messages").add(message.toJson());
-      }
-      text = '';
-      _message.clear();
-    }
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,11 +83,16 @@ class _ChatScreenViewState extends State<ChatScreenView> {
           ],
         ),
       ),
-      body: Column(
+      body: ViewModelBuilder<ChatsViewModel>.reactive(
+        viewModelBuilder: () => ChatsViewModel(),
+        builder: (_, model, __) => Column(
         children: [
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance.collection("chat_messages").orderBy("timestamp").snapshots(),
+
+              stream: FirebaseFirestore.instance.collection("chat_messages")
+                  .orderBy("timestamp", descending: false).snapshots(),
+
               builder: (context, snapshot){
                 if(snapshot.hasData){
                   if(snapshot.data!.docs.isEmpty){
@@ -156,8 +153,32 @@ class _ChatScreenViewState extends State<ChatScreenView> {
           ),
 
         ],
-      ),
+      ),),
     );
+  }
+
+  Future<void> _send(String text) async {
+    if (kDebugMode) {
+      final user = FirebaseAuth.instance.currentUser;
+      if(user != null){
+        Message message = Message(
+          author: user.displayName ?? "Anonymous",
+          authorId: user.uid,
+          photoUrl: user.photoURL ?? "https://placehold.it/100x100",
+          timestamp: Timestamp.now().millisecondsSinceEpoch,
+          value: text,
+        );
+        await FirebaseFirestore.instance.collection("chat_messages").add(message.toJson());
+      }
+      text = '';
+      _message.clear();
+    }
+  }
+
+  @override
+  void dispose() {
+    _message.dispose();
+    super.dispose();
   }
 }
 
@@ -174,6 +195,7 @@ class MessageWall extends StatelessWidget {
       padding: const EdgeInsets.only(top: 5),
       itemBuilder: (c,i){
         Message message = Message.fromJson(messages.elementAt(i).data() as Map<String, dynamic>);
+
         final user = FirebaseAuth.instance.currentUser;
 
         if(user != null && user.uid == message.authorId){
@@ -182,9 +204,9 @@ class MessageWall extends StatelessWidget {
                 _onDelete(messages.elementAt(i).id);
               },
               key: ValueKey(message.timestamp),
-              child: ChatMessage(index: i, data: message));
+              child: UserMessage(index: i, data: message));
         }
-        return ChatMessageOther(index: i, data: message);
+        return OthersMessage(index: i, data: message);
       },
       separatorBuilder: (c,i){
         return SizedBox(height: DeviceScaler().scale(5),);
@@ -197,100 +219,10 @@ class MessageWall extends StatelessWidget {
   }
 }
 
-class ChatMessageOther extends StatelessWidget {
-  final int index;
-  final Message data;
-  final bool hasPadding;
-  const ChatMessageOther({Key? key,required this.index,required this.data, this.hasPadding = false}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 5,bottom: 5, left: 10, right: 10),
-      child: Row(
-
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            constraints: const BoxConstraints(
-              maxWidth: 200,
-            ),
-            margin: const EdgeInsets.only(left: 10,),
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-            decoration: BoxDecoration(
-              color: Palette.white,
-              borderRadius: BorderRadius.circular(5),
-            ),
-            child: Text("${data.value}"),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class ChatMessage extends StatelessWidget {
-  final int index;
-  final Message data;
-  const ChatMessage({Key? key,required this.index,required this.data}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 5,bottom: 5, left: 10, right: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Container(
-            constraints: const BoxConstraints(
-              maxWidth: 200,
-            ),
-            margin: const EdgeInsets.only(right: 10,),
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-            decoration: BoxDecoration(
-              color: Palette.primary.withOpacity(.5),
-              borderRadius: BorderRadius.circular(5),
-            ),
-            child: Text("${data.value}"),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 
 
 
-class Message{
-  final String? author;
-  final String? authorId;
-  final String? photoUrl;
-  final int? timestamp;
-  final String? value;
 
-  Message({
-   this.author,
-   this.authorId,
-   this.photoUrl,
-   this.timestamp,
-   this.value,
- });
 
-  static Message fromJson(Map<String, dynamic> json) => Message(
-    author: json['author'],
-    authorId: json['author_id'],
-    photoUrl: json['photo_url'],
-    timestamp: json['timestamp'],
-    value: json['value']
-  );
 
-  Map<String, dynamic> toJson ()=> {
-    "author": author,
-    "author_id": authorId,
-    "photo_url": photoUrl,
-    "timestamp": timestamp,
-    "value": value,
-  };
-
-}

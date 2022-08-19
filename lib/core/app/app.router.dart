@@ -5,7 +5,6 @@
 // **************************************************************************
 
 // ignore_for_file: public_member_api_docs
-import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -127,7 +126,6 @@ class StackedRouter extends RouterBase {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => PostView(
           key: args.key,
-          file: args.file,
           platformFile: args.platformFile,
         ),
         settings: data,
@@ -158,7 +156,6 @@ class ChatScreenViewArguments {
 /// PostView arguments holder class
 class PostViewArguments {
   final Key? key;
-  final File? file;
   final PlatformFile? platformFile;
-  PostViewArguments({this.key, this.file, this.platformFile});
+  PostViewArguments({this.key, this.platformFile});
 }

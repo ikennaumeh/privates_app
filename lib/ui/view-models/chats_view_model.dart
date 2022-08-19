@@ -18,6 +18,8 @@ class ChatsViewModel extends BaseViewModel{
     Chat(name: "LaMelo Ball", image: "assets/png/chat1.png", status: "Seen", lastSeen: DateTime.now()),
   ];
 
+
+
   void goToChatScreen(Chat chat){
     _navigationService.navigateTo(Routes.chatScreenView, arguments: ChatScreenViewArguments(chat: chat));
   }

@@ -1,34 +1,31 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:privates_app/core/decorations/color_palette.dart';
 import 'package:privates_app/core/decorations/device_scaler.dart';
+import 'package:privates_app/core/models/post.dart';
 import 'package:privates_app/generated/l10n.dart';
 import 'package:privates_app/ui/view-models/post_view_model.dart';
 import 'package:privates_app/ui/widgets/button.dart';
 import 'package:stacked/stacked.dart';
 
 class PostView extends StatefulWidget {
-  final File? file;
   final PlatformFile? platformFile;
-  const PostView({Key? key, this.file, this.platformFile}) : super(key: key);
+  const PostView({Key? key, this.platformFile}) : super(key: key);
 
   @override
   State<PostView> createState() => _PostViewState();
 }
 
 class _PostViewState extends State<PostView> {
-  final TextEditingController _name = TextEditingController();
-  final TextEditingController _profession = TextEditingController();
-  late PostViewModel _model;
+  late TextEditingController captionController;
 
   @override
   void initState() {
-    _model = PostViewModel();
     super.initState();
+    captionController = TextEditingController();
   }
 
   @override
@@ -37,119 +34,77 @@ class _PostViewState extends State<PostView> {
       viewModelBuilder: () => PostViewModel(),
       builder: (_, model, __) => Scaffold(
         body: SafeArea(
-          child: Column(
-            children: [
-              const SizedBox(height: 100,),
-              Container(
-                height: 200,
-                width: 200,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: FileImage(File("${widget.platformFile?.path}")),
-                    )
-                ),
-              ),
-              TextFormField(
-                controller: _name,
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  labelText: "Text",
-                  labelStyle: TextStyle(
-                    color: Palette.darkBlue,
-                  ),
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Palette.grey)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Palette.primary)),
-                  errorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Palette.red)),
-                  focusedErrorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Palette.red)),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 50),
-                child: TextFormField(
-                  controller: _profession,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                    labelText: "Text",
-                    labelStyle: TextStyle(
-                      color: Palette.darkBlue,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 100,),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        height: 200,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: FileImage(File("${widget.platformFile?.path}")),
+                            )
+                        ),
+                      ),
                     ),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Palette.grey)),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Palette.primary)),
-                    errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Palette.red)),
-                    focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Palette.red)),
+                    Expanded(
+                      flex: 3,
+                      child: TextFormField(
+                        controller: captionController,
+                        keyboardType: TextInputType.emailAddress,
+                        maxLines: 3,
+                        decoration:  InputDecoration(
+                          hintText: S.current.write_caption,
+                          labelStyle: const TextStyle(
+                            color: Palette.darkBlue,
+                          ),
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10,),
+                  ],
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: PrimaryButton(
+                    margin: EdgeInsets.only(
+                      top: DeviceScaler().scale(43),
+                    ),
+                    buttonConfig: ButtonConfig(
+                      action: () {
+
+                        Post user = Post(name: FirebaseAuth.instance.currentUser?.displayName ?? 'Anonymous', caption: captionController.text, timestamp: Timestamp.now().millisecondsSinceEpoch);
+
+                        model.createPost(user, widget.platformFile);
+                        model.goBack();
+                      },
+                      text: S.current.post,
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: PrimaryButton(
-                  margin: EdgeInsets.only(
-                    top: DeviceScaler().scale(43),
-                  ),
-                  buttonConfig: ButtonConfig(
-                    action: () {
-
-                      Upload user = Upload(name: _name.text, profession: _profession.text);
-
-                      createPost(user);
-                      model.goBack();
-                    },
-                    text: S.current.post,
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  Future createPost(Upload user) async {
-
-    //upload image first
-    final path = "uploads/${widget.platformFile?.name}";
-    final file = File(widget.platformFile!.path!);
-
-    final ref = FirebaseStorage.instance.ref().child(path);
-    final task = ref.putFile(file);
-    final snapshot = await task.whenComplete((){});
-    final imageLink = await snapshot.ref.getDownloadURL();
-
-    final docUser = FirebaseFirestore.instance.collection("users").doc();
-    user.id = docUser.id;
-    user.postLink = imageLink;
-    await docUser.set(user.toJson());
+  @override
+  void dispose() {
+    captionController.dispose();
+    super.dispose();
   }
 
 }
 
-class Upload {
-  String? id;
-  final String name;
-  final String profession;
-  String? postLink;
-  final DateTime? time;
 
-  Upload({this.id = '', required this.name, required this.profession,  this.time, this.postLink});
-
-  Map<String, dynamic> toJson() =>
-      {"id": id, "name": name, "profession": profession, "time": DateTime.now(), "postLink": postLink};
-
-  static Upload fromJson(Map<String, dynamic> json) => Upload(
-        id: json['id'],
-        name: json['name'],
-        profession: json['profession'],
-        postLink: json['postLink']
-
-      );
-}

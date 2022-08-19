@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:privates_app/core/decorations/color_palette.dart';
 import 'package:privates_app/core/decorations/device_scaler.dart';
+import 'package:privates_app/core/models/post.dart';
+
 
 class PostWidget extends StatelessWidget {
-  final String imageUrl;
+  final Post data;
   const PostWidget({
-    Key? key, required this.imageUrl,
+    Key? key, required this.data,
   }) : super(key: key);
 
   @override
@@ -16,14 +18,14 @@ class PostWidget extends StatelessWidget {
         Stack(
           children: [
             Container(
-              height: DeviceScaler().scale(190),
+              height: DeviceScaler().scale(400),
               margin: EdgeInsets.only(left: 11, right: 11, top: DeviceScaler().scale(13)),
               width: double.maxFinite,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(topRight: const Radius.circular(10), topLeft: const Radius.circular(10)),
+                  borderRadius: const BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)),
                   image: DecorationImage(
-                      image: AssetImage(imageUrl),
-                      fit: BoxFit.fill
+                      image: NetworkImage('${data.postLink}'),
+                      fit: BoxFit.cover
                   )
               ),
 
@@ -43,7 +45,7 @@ class PostWidget extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'Star Girl 005',
+                          data.name,
                           style: TextStyle(
                               fontWeight: FontWeight.w700,
                               fontSize: DeviceScaler().scaleFont(12),
@@ -87,7 +89,7 @@ class PostWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Shhh! 🎙️Get milkshakes with @willowwhispers as Mia Wallace in this Pulp Fiction-inspired ASMR cosplay.For more ASMR videos, watch Willow Whispers on OFTV: https://of.tv/creators/willow-whispers/",
+                data.caption,
                 style: TextStyle(
                   color: Palette.black,
                   fontSize: DeviceScaler().scaleFont(12),

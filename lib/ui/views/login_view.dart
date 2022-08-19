@@ -124,9 +124,9 @@ class _LoginViewState extends State<LoginView> {
                                         borderSide: BorderSide(color: Palette.grey)),
                                     focusedBorder: const OutlineInputBorder(
                                         borderSide: BorderSide(color: Palette.primary)),
-                                    errorBorder: OutlineInputBorder(
+                                    errorBorder: const OutlineInputBorder(
                                         borderSide: BorderSide(color: Palette.red)),
-                                    focusedErrorBorder: OutlineInputBorder(
+                                    focusedErrorBorder: const OutlineInputBorder(
                                         borderSide: BorderSide(color: Palette.red)),
                                   ),
                                   validator: (value) => Validator.validatePassword(value),
@@ -169,7 +169,7 @@ class _LoginViewState extends State<LoginView> {
                     buttonConfig: ButtonConfig(
                       action: () {
                         if (_formKey.currentState!.validate()) {
-                          model.login(email: _email.text, password: _password.text);
+                          model.login(email: _email.text.trim(), password: _password.text.trim());
                         }
                       },
                       text: S.current.login,
