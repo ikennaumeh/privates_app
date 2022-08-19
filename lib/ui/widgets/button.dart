@@ -37,7 +37,7 @@ class PrimaryButton extends StatelessWidget {
           highlightColor: Palette.primary.withOpacity(0.3),
           child: Center(
             child: Text(
-              buttonConfig.text.toUpperCase(),
+              buttonConfig.text.toLowerCase(),
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontWeight: FontWeight.w700,
@@ -87,7 +87,7 @@ class PrimaryBorderButton extends StatelessWidget {
           highlightColor: Palette.primary.withOpacity(0.3),
           child: Center(
             child: Text(
-              buttonConfig.text.toUpperCase(),
+              buttonConfig.text.toLowerCase(),
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontWeight: FontWeight.w700,

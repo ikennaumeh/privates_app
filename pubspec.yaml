@@ -48,9 +48,13 @@ dependencies:
   google_fonts: ^3.0.1
   timeago: ^3.2.2
   libphonenumber: ^2.0.2
+  flutter_native_image: ^0.0.6+1
+  image_picker: ^0.8.5
+  file_picker: ^4.6.1
   firebase_auth: ^3.4.2
   firebase_core: ^1.20.0
   cloud_firestore: ^3.3.0
+  firebase_storage: ^10.2.15
 
 
 dev_dependencies:

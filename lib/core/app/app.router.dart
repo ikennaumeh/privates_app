@@ -6,6 +6,7 @@
 
 // ignore_for_file: public_member_api_docs
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -119,8 +120,14 @@ class StackedRouter extends RouterBase {
       );
     },
     PostView: (data) {
+      var args = data.getArgs<PostViewArguments>(
+        orElse: () => PostViewArguments(),
+      );
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const PostView(),
+        builder: (context) => PostView(
+          key: args.key,
+          platformFile: args.platformFile,
+        ),
         settings: data,
       );
     },
@@ -144,4 +151,11 @@ class ChatScreenViewArguments {
   final Key? key;
   final Chat chat;
   ChatScreenViewArguments({this.key, required this.chat});
+}
+
+/// PostView arguments holder class
+class PostViewArguments {
+  final Key? key;
+  final PlatformFile? platformFile;
+  PostViewArguments({this.key, this.platformFile});
 }
