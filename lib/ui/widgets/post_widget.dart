@@ -18,7 +18,7 @@ class PostWidget extends StatelessWidget {
         Stack(
           children: [
             Container(
-              height: DeviceScaler().scale(400),
+              height: DeviceScaler().scale(330),
               margin: EdgeInsets.only(left: 11, right: 11, top: DeviceScaler().scale(13)),
               width: double.maxFinite,
               decoration: BoxDecoration(
@@ -37,33 +37,20 @@ class PostWidget extends StatelessWidget {
               child: Container(
                 width: double.maxFinite,
                 margin: const EdgeInsets.only(left: 11, right: 11,),
-                padding: EdgeInsets.symmetric(horizontal: 28, vertical: DeviceScaler().scale(15)),
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: DeviceScaler().scale(15)),
                 color: Palette.primary.withOpacity(.38),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
                   children: [
-                    Row(
-                      children: [
-                        Text(
-                          data.name,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: DeviceScaler().scaleFont(12),
-                              color: Palette.white
-                          ),
-                        ),
-                        const SizedBox(width: 5,),
-                        SvgPicture.asset("assets/svg/p-icon.svg", width: 18,),
-                      ],
-                    ),
                     Text(
-                      '@stargirlriri',
+                      data.name,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: DeviceScaler().scaleFont(10),
+                          fontSize: DeviceScaler().scaleFont(12),
                           color: Palette.white
                       ),
                     ),
+                    const SizedBox(width: 5,),
+                    SvgPicture.asset("assets/svg/p-icon.svg", width: 18,),
                   ],
                 ),
               ),

@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:privates_app/core/app/app.locator.dart';
 import 'package:privates_app/core/app/app.router.dart';
@@ -12,6 +13,7 @@ import 'package:stacked_services/stacked_services.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await GetStorage.init();
   setupLocator();
   runApp(const MyApp());
 }
@@ -51,6 +53,7 @@ class MyApp extends StatelessWidget {
       initialRoute: Routes.splashView,
       onGenerateRoute: StackedRouter().onGenerateRoute,
       navigatorKey: StackedService.navigatorKey,
+      navigatorObservers: [StackedService.routeObserver],
     );
   }
 }

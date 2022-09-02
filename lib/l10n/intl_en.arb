@@ -31,6 +31,8 @@
   "chats": "Chats",
   "error": "Error",
   "post": "Post",
-  "write_caption": "Write caption"
+  "write_caption": "Write caption",
+  "id": "id",
+  "error_message": "Something happened. Try again later."
 
 }
