@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:privates_app/core/decorations/color_palette.dart';
+import 'package:privates_app/core/decorations/device_scaler.dart';
 import 'package:privates_app/core/models/message.dart';
 
 class UserMessage extends StatelessWidget {
@@ -10,7 +11,7 @@ class UserMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 5, right: 10),
+      margin: const EdgeInsets.only(right: 10, bottom: 4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -19,13 +20,13 @@ class UserMessage extends StatelessWidget {
               maxWidth: 200,
             ),
             margin: const EdgeInsets.only(right: 10,),
-            padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 7),
-            decoration: BoxDecoration(
-              color: Palette.primary.withOpacity(.5),
-              borderRadius: BorderRadius.circular(5),
-            ),
             child: Text("${data.value}",
-              style: const TextStyle(color: Palette.white),),
+              style: TextStyle(
+                  color: Palette.primary,
+                  fontSize: DeviceScaler().scaleFont(16),
+                  fontWeight: FontWeight.w500,
+              ),
+            ),
           ),
         ],
       ),

@@ -35,7 +35,7 @@ class _ChatScreenViewState extends State<ChatScreenView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Palette.grey,
+      backgroundColor: Palette.white,
       appBar: AppBar(
         leading: const CustomBackButton(),
         title: Column(
