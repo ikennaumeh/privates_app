@@ -68,13 +68,12 @@ class _HomeViewState extends State<HomeView> {
                               .toList(),
                         );
                       }
-                      return Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: const [
-                          Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        ],
+                      return const SizedBox(
+                        height: double.maxFinite,
+                        width: double.maxFinite,
+                        child:  Center(
+                          child: CircularProgressIndicator(),
+                        ),
                       );
                     },
                   ),

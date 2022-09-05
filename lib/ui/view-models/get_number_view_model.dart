@@ -16,7 +16,6 @@ class GetNumberViewModel extends BaseViewModel{
 
   Future<void> goToOtpView(PhoneNumber phone) async {
     setBusy(true);
-    notifyListeners();
      try{
        bool isValid = await _phoneUtil.isValidPhoneNumber(
          phoneNumber: phone.completeNumber,
@@ -52,7 +51,6 @@ class GetNumberViewModel extends BaseViewModel{
        _showDialog.showDialog(title: "Error", description: e.message);
      } finally {
        setBusy(false);
-       notifyListeners();
      }
 
 

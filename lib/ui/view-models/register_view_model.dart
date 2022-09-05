@@ -14,7 +14,6 @@ class RegisterViewModel extends BaseViewModel{
 
   Future<void> register({required String email, required String password, required String fullName}) async {
     setBusy(true);
-    notifyListeners();
     try{
       _user = await _auth.registerUser(email: email, password: password).whenComplete(() async {
         await _auth.setFullName(fullName: fullName);
@@ -28,7 +27,6 @@ class RegisterViewModel extends BaseViewModel{
       _showDialog.showDialog(title: "Error", description: e.message);
     } finally {
       setBusy(false);
-      notifyListeners();
     }
 
 
