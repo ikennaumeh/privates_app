@@ -26,7 +26,6 @@ class LoginViewModel extends BaseViewModel{
   Future<void> login({required String email, required String password}) async {
     log.i("Login hit");
     setBusy(true);
-    notifyListeners();
     try{
        _user = await _auth.login(email: email, password: password);
       if(_user != null){
@@ -41,7 +40,6 @@ class LoginViewModel extends BaseViewModel{
       _showDialog.showDialog(title: S.current.error, description: S.current.error_message);
     }finally{
       setBusy(false);
-      notifyListeners();
     }
 
   }

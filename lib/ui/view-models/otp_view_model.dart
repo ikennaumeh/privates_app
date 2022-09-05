@@ -12,7 +12,6 @@ class OtpViewModel extends BaseViewModel{
 
   Future<void> goToRegistration(PhoneAuthCredential phoneAuth) async {
     setBusy(true);
-    notifyListeners();
     try{
       final auth = await _auth.signInWithCredential(phoneAuth);
       if(auth.user != null){
@@ -22,7 +21,6 @@ class OtpViewModel extends BaseViewModel{
       _showDialog.showDialog(title: "Error", description: e.message);
     } finally {
       setBusy(false);
-      notifyListeners();
     }
 
   }
