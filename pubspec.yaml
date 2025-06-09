@@ -7,6 +7,8 @@ environment:
   sdk: '>=3.0.3 <4.0.0'
 
 dependencies:
+  flutter_animate: ^4.5.2
+  flutter_svg: ^2.1.0
   flutter:
     sdk: flutter
   stacked: ^3.4.0
