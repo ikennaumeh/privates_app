@@ -104,29 +104,36 @@ class StartupView extends StackedView<StartupViewModel> {
                           duration: kdHalfSecond,
                           transitionBuilder: (child, animation) =>
                               FadeTransition(opacity: animation, child: child),
-                          child: viewModel.currentPage != viewModel.totalPages ? TextButton(
-                            onPressed: viewModel.currentPage == 0
-                                ? viewModel.onSkip
-                                : viewModel.onPrev,
-                            child: AnimatedSwitcher(
-                              duration: kdHalfSecond,
-                              transitionBuilder: (child, animation) =>
-                                  FadeTransition(opacity: animation, child: child),
-                              child: Text(
-                                viewModel.currentPage == 0 ? ksSkip : ksPrev,
-                                key: ValueKey(viewModel.currentPage),
-                                style: context.textTheme.titleLarge!.copyWith(
-                                  height: 1,
-                                  color: context.colorScheme.onPrimary,
-                                  fontWeight: FontWeight.w900,
-                                  fontFamily: AppFonts.nunito,
-                                  decoration: TextDecoration.underline,
-                                  decorationColor: context.colorScheme.onPrimary,
-                                  decorationThickness: 3,
-                                ),
-                              ),
-                            ),
-                          ) : const SizedBox(),
+                          child: viewModel.currentPage != viewModel.totalPages
+                              ? TextButton(
+                                  onPressed: viewModel.currentPage == 0
+                                      ? viewModel.onSkip
+                                      : viewModel.onPrev,
+                                  child: AnimatedSwitcher(
+                                    duration: kdHalfSecond,
+                                    transitionBuilder: (child, animation) =>
+                                        FadeTransition(
+                                            opacity: animation, child: child),
+                                    child: Text(
+                                      viewModel.currentPage == 0
+                                          ? ksSkip
+                                          : ksPrev,
+                                      key: ValueKey(viewModel.currentPage),
+                                      style: context.textTheme.titleLarge!
+                                          .copyWith(
+                                        height: 1,
+                                        color: context.colorScheme.onPrimary,
+                                        fontWeight: FontWeight.w900,
+                                        fontFamily: AppFonts.nunito,
+                                        decoration: TextDecoration.underline,
+                                        decorationColor:
+                                            context.colorScheme.onPrimary,
+                                        decorationThickness: 3,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : const SizedBox(),
                         ),
                         TextButton(
                           onPressed: viewModel.onNext,
@@ -163,7 +170,7 @@ class StartupView extends StackedView<StartupViewModel> {
   }
 
   // This precaches the images used in the startup pages
-  void loadImages (BuildContext context, StartupViewModel viewModel){
+  void loadImages(BuildContext context, StartupViewModel viewModel) {
     for (StartupModel path in viewModel.kStartupDetails) {
       precacheImage(AssetImage(path.image), context);
     }

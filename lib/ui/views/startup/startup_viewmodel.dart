@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:privates/app/app.locator.dart';
+import 'package:privates/app/app.router.dart';
 import 'package:privates/ui/common/app_duration.dart';
 import 'package:privates/ui/common/app_images.dart';
 import 'package:privates/ui/common/app_strings.dart';
@@ -47,11 +48,15 @@ class StartupViewModel extends BaseViewModel {
   /// This moves the pages one index forward and if at the end moves the user
   /// to the next screen
   void onNext() {
-    pageController.animateToPage(
-      currentPage + 1,
-      duration: kdHalfSecond,
-      curve: Curves.easeIn,
-    );
+    if (currentPage == totalPages) {
+      _navigationService.replaceWithAuthView();
+    } else {
+      pageController.animateToPage(
+        currentPage + 1,
+        duration: kdHalfSecond,
+        curve: Curves.easeIn,
+      );
+    }
   }
 
   /// This moves the pages one index backward
@@ -63,9 +68,8 @@ class StartupViewModel extends BaseViewModel {
     );
   }
 
-
   /// This moves the pages to the end
-  void onSkip () {
+  void onSkip() {
     pageController.animateToPage(
       kStartupDetails.length - 1,
       duration: kdHalfSecond,
